@@ -9,6 +9,8 @@ class Medications extends Table {
       integer().withDefault(const Constant(2))();
   RealColumn get currentStockTablets =>
       real().withDefault(const Constant(0))();
+  TextColumn get category =>
+      text().withDefault(const Constant('purchase'))();
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
   DateTimeColumn get archivedAt => dateTime().nullable()();
 }

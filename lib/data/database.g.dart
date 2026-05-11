@@ -79,6 +79,18 @@ class $MedicationsTable extends Medications
         requiredDuringInsert: false,
         defaultValue: const Constant(0),
       );
+  static const VerificationMeta _categoryMeta = const VerificationMeta(
+    'category',
+  );
+  @override
+  late final GeneratedColumn<String> category = GeneratedColumn<String>(
+    'category',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('purchase'),
+  );
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
   );
@@ -110,6 +122,7 @@ class $MedicationsTable extends Medications
     packageSize,
     alertThresholdWeeks,
     currentStockTablets,
+    category,
     createdAt,
     archivedAt,
   ];
@@ -169,6 +182,12 @@ class $MedicationsTable extends Medications
         ),
       );
     }
+    if (data.containsKey('category')) {
+      context.handle(
+        _categoryMeta,
+        category.isAcceptableOrUnknown(data['category']!, _categoryMeta),
+      );
+    }
     if (data.containsKey('created_at')) {
       context.handle(
         _createdAtMeta,
@@ -214,6 +233,10 @@ class $MedicationsTable extends Medications
         DriftSqlType.double,
         data['${effectivePrefix}current_stock_tablets'],
       )!,
+      category: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}category'],
+      )!,
       createdAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}created_at'],
@@ -238,6 +261,7 @@ class Medication extends DataClass implements Insertable<Medication> {
   final int packageSize;
   final int alertThresholdWeeks;
   final double currentStockTablets;
+  final String category;
   final DateTime createdAt;
   final DateTime? archivedAt;
   const Medication({
@@ -247,6 +271,7 @@ class Medication extends DataClass implements Insertable<Medication> {
     required this.packageSize,
     required this.alertThresholdWeeks,
     required this.currentStockTablets,
+    required this.category,
     required this.createdAt,
     this.archivedAt,
   });
@@ -261,6 +286,7 @@ class Medication extends DataClass implements Insertable<Medication> {
     map['package_size'] = Variable<int>(packageSize);
     map['alert_threshold_weeks'] = Variable<int>(alertThresholdWeeks);
     map['current_stock_tablets'] = Variable<double>(currentStockTablets);
+    map['category'] = Variable<String>(category);
     map['created_at'] = Variable<DateTime>(createdAt);
     if (!nullToAbsent || archivedAt != null) {
       map['archived_at'] = Variable<DateTime>(archivedAt);
@@ -278,6 +304,7 @@ class Medication extends DataClass implements Insertable<Medication> {
       packageSize: Value(packageSize),
       alertThresholdWeeks: Value(alertThresholdWeeks),
       currentStockTablets: Value(currentStockTablets),
+      category: Value(category),
       createdAt: Value(createdAt),
       archivedAt: archivedAt == null && nullToAbsent
           ? const Value.absent()
@@ -301,6 +328,7 @@ class Medication extends DataClass implements Insertable<Medication> {
       currentStockTablets: serializer.fromJson<double>(
         json['currentStockTablets'],
       ),
+      category: serializer.fromJson<String>(json['category']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       archivedAt: serializer.fromJson<DateTime?>(json['archivedAt']),
     );
@@ -315,6 +343,7 @@ class Medication extends DataClass implements Insertable<Medication> {
       'packageSize': serializer.toJson<int>(packageSize),
       'alertThresholdWeeks': serializer.toJson<int>(alertThresholdWeeks),
       'currentStockTablets': serializer.toJson<double>(currentStockTablets),
+      'category': serializer.toJson<String>(category),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'archivedAt': serializer.toJson<DateTime?>(archivedAt),
     };
@@ -327,6 +356,7 @@ class Medication extends DataClass implements Insertable<Medication> {
     int? packageSize,
     int? alertThresholdWeeks,
     double? currentStockTablets,
+    String? category,
     DateTime? createdAt,
     Value<DateTime?> archivedAt = const Value.absent(),
   }) => Medication(
@@ -336,6 +366,7 @@ class Medication extends DataClass implements Insertable<Medication> {
     packageSize: packageSize ?? this.packageSize,
     alertThresholdWeeks: alertThresholdWeeks ?? this.alertThresholdWeeks,
     currentStockTablets: currentStockTablets ?? this.currentStockTablets,
+    category: category ?? this.category,
     createdAt: createdAt ?? this.createdAt,
     archivedAt: archivedAt.present ? archivedAt.value : this.archivedAt,
   );
@@ -353,6 +384,7 @@ class Medication extends DataClass implements Insertable<Medication> {
       currentStockTablets: data.currentStockTablets.present
           ? data.currentStockTablets.value
           : this.currentStockTablets,
+      category: data.category.present ? data.category.value : this.category,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       archivedAt: data.archivedAt.present
           ? data.archivedAt.value
@@ -369,6 +401,7 @@ class Medication extends DataClass implements Insertable<Medication> {
           ..write('packageSize: $packageSize, ')
           ..write('alertThresholdWeeks: $alertThresholdWeeks, ')
           ..write('currentStockTablets: $currentStockTablets, ')
+          ..write('category: $category, ')
           ..write('createdAt: $createdAt, ')
           ..write('archivedAt: $archivedAt')
           ..write(')'))
@@ -383,6 +416,7 @@ class Medication extends DataClass implements Insertable<Medication> {
     packageSize,
     alertThresholdWeeks,
     currentStockTablets,
+    category,
     createdAt,
     archivedAt,
   );
@@ -396,6 +430,7 @@ class Medication extends DataClass implements Insertable<Medication> {
           other.packageSize == this.packageSize &&
           other.alertThresholdWeeks == this.alertThresholdWeeks &&
           other.currentStockTablets == this.currentStockTablets &&
+          other.category == this.category &&
           other.createdAt == this.createdAt &&
           other.archivedAt == this.archivedAt);
 }
@@ -407,6 +442,7 @@ class MedicationsCompanion extends UpdateCompanion<Medication> {
   final Value<int> packageSize;
   final Value<int> alertThresholdWeeks;
   final Value<double> currentStockTablets;
+  final Value<String> category;
   final Value<DateTime> createdAt;
   final Value<DateTime?> archivedAt;
   const MedicationsCompanion({
@@ -416,6 +452,7 @@ class MedicationsCompanion extends UpdateCompanion<Medication> {
     this.packageSize = const Value.absent(),
     this.alertThresholdWeeks = const Value.absent(),
     this.currentStockTablets = const Value.absent(),
+    this.category = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.archivedAt = const Value.absent(),
   });
@@ -426,6 +463,7 @@ class MedicationsCompanion extends UpdateCompanion<Medication> {
     this.packageSize = const Value.absent(),
     this.alertThresholdWeeks = const Value.absent(),
     this.currentStockTablets = const Value.absent(),
+    this.category = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.archivedAt = const Value.absent(),
   }) : name = Value(name);
@@ -436,6 +474,7 @@ class MedicationsCompanion extends UpdateCompanion<Medication> {
     Expression<int>? packageSize,
     Expression<int>? alertThresholdWeeks,
     Expression<double>? currentStockTablets,
+    Expression<String>? category,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? archivedAt,
   }) {
@@ -448,6 +487,7 @@ class MedicationsCompanion extends UpdateCompanion<Medication> {
         'alert_threshold_weeks': alertThresholdWeeks,
       if (currentStockTablets != null)
         'current_stock_tablets': currentStockTablets,
+      if (category != null) 'category': category,
       if (createdAt != null) 'created_at': createdAt,
       if (archivedAt != null) 'archived_at': archivedAt,
     });
@@ -460,6 +500,7 @@ class MedicationsCompanion extends UpdateCompanion<Medication> {
     Value<int>? packageSize,
     Value<int>? alertThresholdWeeks,
     Value<double>? currentStockTablets,
+    Value<String>? category,
     Value<DateTime>? createdAt,
     Value<DateTime?>? archivedAt,
   }) {
@@ -470,6 +511,7 @@ class MedicationsCompanion extends UpdateCompanion<Medication> {
       packageSize: packageSize ?? this.packageSize,
       alertThresholdWeeks: alertThresholdWeeks ?? this.alertThresholdWeeks,
       currentStockTablets: currentStockTablets ?? this.currentStockTablets,
+      category: category ?? this.category,
       createdAt: createdAt ?? this.createdAt,
       archivedAt: archivedAt ?? this.archivedAt,
     );
@@ -498,6 +540,9 @@ class MedicationsCompanion extends UpdateCompanion<Medication> {
         currentStockTablets.value,
       );
     }
+    if (category.present) {
+      map['category'] = Variable<String>(category.value);
+    }
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
     }
@@ -516,6 +561,7 @@ class MedicationsCompanion extends UpdateCompanion<Medication> {
           ..write('packageSize: $packageSize, ')
           ..write('alertThresholdWeeks: $alertThresholdWeeks, ')
           ..write('currentStockTablets: $currentStockTablets, ')
+          ..write('category: $category, ')
           ..write('createdAt: $createdAt, ')
           ..write('archivedAt: $archivedAt')
           ..write(')'))
@@ -2237,6 +2283,7 @@ typedef $$MedicationsTableCreateCompanionBuilder =
       Value<int> packageSize,
       Value<int> alertThresholdWeeks,
       Value<double> currentStockTablets,
+      Value<String> category,
       Value<DateTime> createdAt,
       Value<DateTime?> archivedAt,
     });
@@ -2248,6 +2295,7 @@ typedef $$MedicationsTableUpdateCompanionBuilder =
       Value<int> packageSize,
       Value<int> alertThresholdWeeks,
       Value<double> currentStockTablets,
+      Value<String> category,
       Value<DateTime> createdAt,
       Value<DateTime?> archivedAt,
     });
@@ -2356,6 +2404,11 @@ class $$MedicationsTableFilterComposer
 
   ColumnFilters<double> get currentStockTablets => $composableBuilder(
     column: $table.currentStockTablets,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get category => $composableBuilder(
+    column: $table.category,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -2484,6 +2537,11 @@ class $$MedicationsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get category => $composableBuilder(
+    column: $table.category,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
     builder: (column) => ColumnOrderings(column),
@@ -2527,6 +2585,9 @@ class $$MedicationsTableAnnotationComposer
     column: $table.currentStockTablets,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get category =>
+      $composableBuilder(column: $table.category, builder: (column) => column);
 
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
@@ -2650,6 +2711,7 @@ class $$MedicationsTableTableManager
                 Value<int> packageSize = const Value.absent(),
                 Value<int> alertThresholdWeeks = const Value.absent(),
                 Value<double> currentStockTablets = const Value.absent(),
+                Value<String> category = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
                 Value<DateTime?> archivedAt = const Value.absent(),
               }) => MedicationsCompanion(
@@ -2659,6 +2721,7 @@ class $$MedicationsTableTableManager
                 packageSize: packageSize,
                 alertThresholdWeeks: alertThresholdWeeks,
                 currentStockTablets: currentStockTablets,
+                category: category,
                 createdAt: createdAt,
                 archivedAt: archivedAt,
               ),
@@ -2670,6 +2733,7 @@ class $$MedicationsTableTableManager
                 Value<int> packageSize = const Value.absent(),
                 Value<int> alertThresholdWeeks = const Value.absent(),
                 Value<double> currentStockTablets = const Value.absent(),
+                Value<String> category = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
                 Value<DateTime?> archivedAt = const Value.absent(),
               }) => MedicationsCompanion.insert(
@@ -2679,6 +2743,7 @@ class $$MedicationsTableTableManager
                 packageSize: packageSize,
                 alertThresholdWeeks: alertThresholdWeeks,
                 currentStockTablets: currentStockTablets,
+                category: category,
                 createdAt: createdAt,
                 archivedAt: archivedAt,
               ),

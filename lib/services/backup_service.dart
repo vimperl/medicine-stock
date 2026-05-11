@@ -107,6 +107,7 @@ class BackupService {
         'packageSize': m.packageSize,
         'alertThresholdWeeks': m.alertThresholdWeeks,
         'currentStockTablets': m.currentStockTablets,
+        'category': m.category,
         'createdAt': m.createdAt.toIso8601String(),
         'archivedAt': m.archivedAt?.toIso8601String(),
       };
@@ -168,6 +169,7 @@ class BackupService {
                   d.Value(m['alertThresholdWeeks'] as int? ?? 2),
               currentStockTablets: d.Value(
                   (m['currentStockTablets'] as num?)?.toDouble() ?? 0.0),
+              category: d.Value(m['category'] as String? ?? 'purchase'),
               createdAt: d.Value(DateTime.parse(m['createdAt'] as String)),
               archivedAt: d.Value(m['archivedAt'] != null
                   ? DateTime.parse(m['archivedAt'] as String)

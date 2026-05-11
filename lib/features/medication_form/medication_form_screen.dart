@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../data/database.dart';
+import '../../domain/medication_category.dart';
 import '../../domain/time_slot.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../providers.dart';
@@ -24,6 +25,8 @@ class _MedicationFormState extends ConsumerState<MedicationFormScreen> {
   final _packageSizeCtrl = TextEditingController(text: '30');
   final _alertCtrl = TextEditingController(text: '2');
   final _stockCtrl = TextEditingController(text: '0');
+
+  MedicationCategory _category = MedicationCategory.purchase;
 
   // dosage[day][slot] = quantity (double, supports halves)
   final Map<int, Map<TimeSlot, double>> _dosage = {
@@ -55,6 +58,7 @@ class _MedicationFormState extends ConsumerState<MedicationFormScreen> {
       _packageSizeCtrl.text = med.packageSize.toString();
       _alertCtrl.text = med.alertThresholdWeeks.toString();
       _stockCtrl.text = med.currentStockTablets.toString();
+      _category = MedicationCategory.fromKey(med.category);
       for (final e in entries) {
         _dosage[e.dayOfWeek]?[TimeSlot.fromKey(e.timeSlot)] = e.quantity;
       }
@@ -93,6 +97,7 @@ class _MedicationFormState extends ConsumerState<MedicationFormScreen> {
         packageSize: d.Value(packageSize),
         alertThresholdWeeks: d.Value(alert),
         currentStockTablets: d.Value(stock),
+        category: d.Value(_category.key),
         createdAt: d.Value(existing.createdAt),
       ));
       medId = existing.id;
@@ -104,6 +109,7 @@ class _MedicationFormState extends ConsumerState<MedicationFormScreen> {
           packageSize: d.Value(packageSize),
           alertThresholdWeeks: d.Value(alert),
           currentStockTablets: d.Value(stock),
+          category: d.Value(_category.key),
         ),
       );
     }
@@ -183,7 +189,18 @@ class _MedicationFormState extends ConsumerState<MedicationFormScreen> {
               decoration: InputDecoration(labelText: l.medicationNotes),
               maxLines: 2,
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(l.category,
+                  style: Theme.of(context).textTheme.labelLarge),
+            ),
+            const SizedBox(height: 8),
+            _CategorySelector(
+              value: _category,
+              onChanged: (c) => setState(() => _category = c),
+            ),
+            const SizedBox(height: 16),
             Row(children: [
               Expanded(
                 child: TextFormField(
@@ -358,6 +375,32 @@ class _SlotRow extends StatelessWidget {
 String _format(double v) {
   if (v == v.toInt()) return v.toInt().toString();
   return v.toStringAsFixed(1);
+}
+
+class _CategorySelector extends StatelessWidget {
+  final MedicationCategory value;
+  final ValueChanged<MedicationCategory> onChanged;
+
+  const _CategorySelector({required this.value, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppL10n.of(context)!;
+    final brightness = Theme.of(context).brightness;
+    return SegmentedButton<MedicationCategory>(
+      segments: [
+        for (final c in MedicationCategory.values)
+          ButtonSegment<MedicationCategory>(
+            value: c,
+            icon: Icon(c.icon, color: c.accentColor(brightness)),
+            label: Text(c.label(l)),
+          ),
+      ],
+      selected: {value},
+      onSelectionChanged: (s) => onChanged(s.first),
+      showSelectedIcon: false,
+    );
+  }
 }
 
 class _StepperButton extends StatelessWidget {

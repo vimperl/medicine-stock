@@ -1,5 +1,6 @@
 import '../data/database.dart';
 import 'dosage_calculator.dart';
+import 'medication_category.dart';
 
 class MedicationView {
   final Medication medication;
@@ -23,4 +24,7 @@ class MedicationView {
     if (weeklyConsumption == 0) return false;
     return medication.currentStockTablets < weeklyConsumption;
   }
+
+  MedicationCategory get category =>
+      MedicationCategory.fromKey(medication.category);
 }

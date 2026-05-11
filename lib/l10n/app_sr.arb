@@ -119,5 +119,35 @@
   "negativeStockWarning": "Bice u minusu — molimo prvo dopuni zalihu.",
   "ok": "U redu",
   "untitled": "Bez naziva",
-  "copyMondayToAll": "Kopiraj ponedeljak na ostale dane"
+  "copyMondayToAll": "Kopiraj ponedeljak na ostale dane",
+  "category": "Kategorija",
+  "categoryPrescription": "Na recept",
+  "categoryPurchase": "Kupovina",
+  "categorySupplement": "Suplementi",
+  "weeksOfSupply": "Imas lekove za",
+  "supplyUntil": "do ~ {date}",
+  "@supplyUntil": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "noActiveDosage": "Nema aktivnog doziranja",
+  "summaryActive": "{count, plural, =1{1 aktivan} few{{count} aktivna} other{{count} aktivnih}}",
+  "@summaryActive": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "summaryLow": "{count} uskoro nestaje",
+  "@summaryLow": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "summaryOut": "{count} bez zalihe",
+  "@summaryOut": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "lastRefillAgo": "{days, plural, =0{Kutijica napunjena danas} =1{Kutijica napunjena juce} few{Kutijica napunjena pre {days} dana} other{Kutijica napunjena pre {days} dana}}",
+  "@lastRefillAgo": {
+    "placeholders": { "days": { "type": "int" } }
+  },
+  "neverRefilled": "Kutijica jos nije punjena",
+  "upcomingNeeds": "Uskoro treba dokupiti",
+  "allStocked": "Sve zalihe su u redu",
+  "allMedications": "Svi lekovi"
 }

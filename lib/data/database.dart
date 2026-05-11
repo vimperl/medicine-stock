@@ -9,7 +9,7 @@ import 'daos/settings_dao.dart';
 
 part 'database.g.dart';
 
-const int kCurrentSchemaVersion = 2;
+const int kCurrentSchemaVersion = 3;
 
 @DriftDatabase(
   tables: [
@@ -44,10 +44,9 @@ class AppDatabase extends _$AppDatabase {
           // in main.dart before drift opens this database, so even a failed
           // step here is recoverable by restoring the .bak-v<from>-*.sqlite.
           //
-          // Add additive steps per version bump, e.g.:
-          //   if (from < 3) {
-          //     await m.addColumn(medications, medications.newField);
-          //   }
+          if (from < 3) {
+            await m.addColumn(medications, medications.category);
+          }
         },
       );
 

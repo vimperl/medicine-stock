@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'data/database.dart';
+import 'domain/home_summary.dart';
 import 'domain/medication_view.dart';
 import 'domain/refill_service.dart';
 
@@ -40,6 +41,13 @@ final purchasesStreamProvider = StreamProvider<List<Purchase>>((ref) {
 final refillsStreamProvider = StreamProvider<List<Refill>>((ref) {
   final db = ref.watch(databaseProvider);
   return db.refillDao.watchAll();
+});
+
+final homeSummaryProvider = FutureProvider<HomeSummary>((ref) async {
+  final views = await ref.watch(medicationViewsProvider.future);
+  final refills = await ref.watch(refillsStreamProvider.future);
+  final last = refills.isEmpty ? null : refills.first.date;
+  return HomeSummary.build(views: views, lastRefillDate: last);
 });
 
 final localeSettingProvider = StreamProvider<String?>((ref) {

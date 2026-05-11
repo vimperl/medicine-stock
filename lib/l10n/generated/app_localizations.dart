@@ -643,6 +643,96 @@ abstract class AppL10n {
   /// In sr, this message translates to:
   /// **'Kopiraj ponedeljak na ostale dane'**
   String get copyMondayToAll;
+
+  /// No description provided for @category.
+  ///
+  /// In sr, this message translates to:
+  /// **'Kategorija'**
+  String get category;
+
+  /// No description provided for @categoryPrescription.
+  ///
+  /// In sr, this message translates to:
+  /// **'Na recept'**
+  String get categoryPrescription;
+
+  /// No description provided for @categoryPurchase.
+  ///
+  /// In sr, this message translates to:
+  /// **'Kupovina'**
+  String get categoryPurchase;
+
+  /// No description provided for @categorySupplement.
+  ///
+  /// In sr, this message translates to:
+  /// **'Suplementi'**
+  String get categorySupplement;
+
+  /// No description provided for @weeksOfSupply.
+  ///
+  /// In sr, this message translates to:
+  /// **'Imas lekove za'**
+  String get weeksOfSupply;
+
+  /// No description provided for @supplyUntil.
+  ///
+  /// In sr, this message translates to:
+  /// **'do ~ {date}'**
+  String supplyUntil(String date);
+
+  /// No description provided for @noActiveDosage.
+  ///
+  /// In sr, this message translates to:
+  /// **'Nema aktivnog doziranja'**
+  String get noActiveDosage;
+
+  /// No description provided for @summaryActive.
+  ///
+  /// In sr, this message translates to:
+  /// **'{count, plural, =1{1 aktivan} few{{count} aktivna} other{{count} aktivnih}}'**
+  String summaryActive(int count);
+
+  /// No description provided for @summaryLow.
+  ///
+  /// In sr, this message translates to:
+  /// **'{count} uskoro nestaje'**
+  String summaryLow(int count);
+
+  /// No description provided for @summaryOut.
+  ///
+  /// In sr, this message translates to:
+  /// **'{count} bez zalihe'**
+  String summaryOut(int count);
+
+  /// No description provided for @lastRefillAgo.
+  ///
+  /// In sr, this message translates to:
+  /// **'{days, plural, =0{Kutijica napunjena danas} =1{Kutijica napunjena juce} few{Kutijica napunjena pre {days} dana} other{Kutijica napunjena pre {days} dana}}'**
+  String lastRefillAgo(int days);
+
+  /// No description provided for @neverRefilled.
+  ///
+  /// In sr, this message translates to:
+  /// **'Kutijica jos nije punjena'**
+  String get neverRefilled;
+
+  /// No description provided for @upcomingNeeds.
+  ///
+  /// In sr, this message translates to:
+  /// **'Uskoro treba dokupiti'**
+  String get upcomingNeeds;
+
+  /// No description provided for @allStocked.
+  ///
+  /// In sr, this message translates to:
+  /// **'Sve zalihe su u redu'**
+  String get allStocked;
+
+  /// No description provided for @allMedications.
+  ///
+  /// In sr, this message translates to:
+  /// **'Svi lekovi'**
+  String get allMedications;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

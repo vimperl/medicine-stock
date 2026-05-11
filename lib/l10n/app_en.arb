@@ -90,5 +90,35 @@
   "negativeStockWarning": "Stock would go negative — please add a purchase first.",
   "ok": "OK",
   "untitled": "Untitled",
-  "copyMondayToAll": "Copy Monday to all days"
+  "copyMondayToAll": "Copy Monday to all days",
+  "category": "Category",
+  "categoryPrescription": "Prescription",
+  "categoryPurchase": "Purchase",
+  "categorySupplement": "Supplement",
+  "weeksOfSupply": "You have medication for",
+  "supplyUntil": "until ~ {date}",
+  "@supplyUntil": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "noActiveDosage": "No active dosage configured",
+  "summaryActive": "{count} active",
+  "@summaryActive": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "summaryLow": "{count} running out",
+  "@summaryLow": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "summaryOut": "{count} out",
+  "@summaryOut": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "lastRefillAgo": "{days, plural, =0{Pillbox filled today} =1{Pillbox filled yesterday} other{Pillbox filled {days} days ago}}",
+  "@lastRefillAgo": {
+    "placeholders": { "days": { "type": "int" } }
+  },
+  "neverRefilled": "Pillbox not filled yet",
+  "upcomingNeeds": "Buy soon",
+  "allStocked": "All medications are well stocked",
+  "allMedications": "All medications"
 }

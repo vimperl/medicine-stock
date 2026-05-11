@@ -304,6 +304,76 @@ class AppL10nSr extends AppL10n {
 
   @override
   String get copyMondayToAll => 'Kopiraj ponedeljak na ostale dane';
+
+  @override
+  String get category => 'Kategorija';
+
+  @override
+  String get categoryPrescription => 'Na recept';
+
+  @override
+  String get categoryPurchase => 'Kupovina';
+
+  @override
+  String get categorySupplement => 'Suplementi';
+
+  @override
+  String get weeksOfSupply => 'Imas lekove za';
+
+  @override
+  String supplyUntil(String date) {
+    return 'do ~ $date';
+  }
+
+  @override
+  String get noActiveDosage => 'Nema aktivnog doziranja';
+
+  @override
+  String summaryActive(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count aktivnih',
+      few: '$count aktivna',
+      one: '1 aktivan',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String summaryLow(int count) {
+    return '$count uskoro nestaje';
+  }
+
+  @override
+  String summaryOut(int count) {
+    return '$count bez zalihe';
+  }
+
+  @override
+  String lastRefillAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Kutijica napunjena pre $days dana',
+      few: 'Kutijica napunjena pre $days dana',
+      one: 'Kutijica napunjena juce',
+      zero: 'Kutijica napunjena danas',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get neverRefilled => 'Kutijica jos nije punjena';
+
+  @override
+  String get upcomingNeeds => 'Uskoro treba dokupiti';
+
+  @override
+  String get allStocked => 'Sve zalihe su u redu';
+
+  @override
+  String get allMedications => 'Svi lekovi';
 }
 
 /// The translations for Serbian, using the Cyrillic script (`sr_Cyrl`).
@@ -606,4 +676,74 @@ class AppL10nSrCyrl extends AppL10nSr {
 
   @override
   String get copyMondayToAll => 'Копирај понедељак на остале дане';
+
+  @override
+  String get category => 'Категорија';
+
+  @override
+  String get categoryPrescription => 'На рецепт';
+
+  @override
+  String get categoryPurchase => 'Куповина';
+
+  @override
+  String get categorySupplement => 'Суплементи';
+
+  @override
+  String get weeksOfSupply => 'Имаш лекове за';
+
+  @override
+  String supplyUntil(String date) {
+    return 'до ~ $date';
+  }
+
+  @override
+  String get noActiveDosage => 'Нема активног дозирања';
+
+  @override
+  String summaryActive(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count активних',
+      few: '$count активна',
+      one: '1 активан',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String summaryLow(int count) {
+    return '$count ускоро нестаје';
+  }
+
+  @override
+  String summaryOut(int count) {
+    return '$count без залихе';
+  }
+
+  @override
+  String lastRefillAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Кутијица напуњена пре $days дана',
+      few: 'Кутијица напуњена пре $days дана',
+      one: 'Кутијица напуњена јуче',
+      zero: 'Кутијица напуњена данас',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get neverRefilled => 'Кутијица још није пуњена';
+
+  @override
+  String get upcomingNeeds => 'Ускоро треба докупити';
+
+  @override
+  String get allStocked => 'Све залихе су у реду';
+
+  @override
+  String get allMedications => 'Сви лекови';
 }

@@ -303,4 +303,66 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get copyMondayToAll => 'Copy Monday to all days';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get categoryPrescription => 'Prescription';
+
+  @override
+  String get categoryPurchase => 'Purchase';
+
+  @override
+  String get categorySupplement => 'Supplement';
+
+  @override
+  String get weeksOfSupply => 'You have medication for';
+
+  @override
+  String supplyUntil(String date) {
+    return 'until ~ $date';
+  }
+
+  @override
+  String get noActiveDosage => 'No active dosage configured';
+
+  @override
+  String summaryActive(int count) {
+    return '$count active';
+  }
+
+  @override
+  String summaryLow(int count) {
+    return '$count running out';
+  }
+
+  @override
+  String summaryOut(int count) {
+    return '$count out';
+  }
+
+  @override
+  String lastRefillAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Pillbox filled $days days ago',
+      one: 'Pillbox filled yesterday',
+      zero: 'Pillbox filled today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get neverRefilled => 'Pillbox not filled yet';
+
+  @override
+  String get upcomingNeeds => 'Buy soon';
+
+  @override
+  String get allStocked => 'All medications are well stocked';
+
+  @override
+  String get allMedications => 'All medications';
 }
