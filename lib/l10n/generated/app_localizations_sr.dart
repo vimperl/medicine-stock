@@ -417,6 +417,9 @@ class AppL10nSr extends AppL10n {
 
   @override
   String get undo => 'Vrati';
+
+  @override
+  String get recentRefillsChart => 'Utroseno po punjenju kutijice (poslednja)';
 }
 
 /// The translations for Serbian, using the Cyrillic script (`sr_Cyrl`).
@@ -832,4 +835,7 @@ class AppL10nSrCyrl extends AppL10nSr {
 
   @override
   String get undo => 'Врати';
+
+  @override
+  String get recentRefillsChart => 'Утрошено по пуњењу кутијице (последња)';
 }

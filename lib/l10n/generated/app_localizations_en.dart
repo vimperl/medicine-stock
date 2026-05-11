@@ -407,4 +407,7 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get undo => 'Undo';
+
+  @override
+  String get recentRefillsChart => 'Tablets per pillbox fill (recent)';
 }

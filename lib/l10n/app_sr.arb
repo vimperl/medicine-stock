@@ -165,5 +165,6 @@
   "unarchive": "Vrati",
   "medicationRestored": "Lek vracen",
   "archiveExplain": "Lek ce biti sakriven iz aktivnih lista. Svi podaci (istorija, nabavke, doze) ostaju sacuvani i mogu se vratiti iz Podesavanja → Arhivirani lekovi.",
-  "undo": "Vrati"
+  "undo": "Vrati",
+  "recentRefillsChart": "Utroseno po punjenju kutijice (poslednja)"
 }

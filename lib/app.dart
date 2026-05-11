@@ -24,12 +24,12 @@ class LekoviApp extends ConsumerWidget {
       onGenerateTitle: (ctx) => AppL10n.of(ctx)!.appTitle,
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.teal,
+        colorSchemeSeed: const Color(0xFF024247),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        colorSchemeSeed: Colors.teal,
+        colorSchemeSeed: const Color(0xFF024247),
       ),
       locale: locale,
       supportedLocales: AppL10n.supportedLocales,

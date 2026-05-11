@@ -793,6 +793,12 @@ abstract class AppL10n {
   /// In sr, this message translates to:
   /// **'Vrati'**
   String get undo;
+
+  /// No description provided for @recentRefillsChart.
+  ///
+  /// In sr, this message translates to:
+  /// **'Utroseno po punjenju kutijice (poslednja)'**
+  String get recentRefillsChart;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

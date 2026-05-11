@@ -7,6 +7,7 @@ import '../../domain/home_summary.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../providers.dart';
 import '../../widgets/medication_tile.dart';
+import '../../widgets/weekly_refill_chart.dart';
 import '../refill/refill_dialog.dart';
 
 class StatsScreen extends ConsumerWidget {
@@ -32,6 +33,7 @@ class StatsScreen extends ConsumerWidget {
               ),
             );
           }
+          final refills = ref.watch(refillsStreamProvider).valueOrNull ?? [];
           return ListView(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 140),
             children: [
@@ -40,6 +42,7 @@ class StatsScreen extends ConsumerWidget {
               if (summary.upcoming.isNotEmpty) ...[
                 _SectionHeader(text: l.upcomingNeeds),
                 for (final v in summary.upcoming) MedicationTile(view: v),
+                const SizedBox(height: 16),
               ] else
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -54,6 +57,21 @@ class StatsScreen extends ConsumerWidget {
                     ),
                   ]),
                 ),
+              if (refills.length >= 2) ...[
+                _SectionHeader(text: l.recentRefillsChart),
+                Card(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    side: BorderSide(
+                        color: Theme.of(context).colorScheme.outlineVariant),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 16, 16, 8),
+                    child: WeeklyRefillChart(refills: refills),
+                  ),
+                ),
+              ],
             ],
           );
         },
