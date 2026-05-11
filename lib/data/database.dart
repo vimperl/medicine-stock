@@ -9,6 +9,8 @@ import 'daos/settings_dao.dart';
 
 part 'database.g.dart';
 
+const int kCurrentSchemaVersion = 2;
+
 @DriftDatabase(
   tables: [
     Medications,
@@ -31,18 +33,21 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.executor);
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => kCurrentSchemaVersion;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (m) => m.createAll(),
         onUpgrade: (m, from, to) async {
-          if (from < 2) {
-            for (final t in allTables) {
-              await m.deleteTable(t.actualTableName);
-            }
-            await m.createAll();
-          }
+          // Non-destructive migrations only. A pre-migration copy of the
+          // .sqlite file is written by DatabaseBackup.backupBeforeMigration()
+          // in main.dart before drift opens this database, so even a failed
+          // step here is recoverable by restoring the .bak-v<from>-*.sqlite.
+          //
+          // Add additive steps per version bump, e.g.:
+          //   if (from < 3) {
+          //     await m.addColumn(medications, medications.newField);
+          //   }
         },
       );
 
