@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../domain/home_summary.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../providers.dart';
+import '../../widgets/empty_state.dart';
 import '../../widgets/medication_tile.dart';
 import '../../widgets/weekly_refill_chart.dart';
 import '../refill/refill_dialog.dart';
@@ -24,13 +25,12 @@ class StatsScreen extends ConsumerWidget {
         error: (e, _) => Center(child: Text('$e')),
         data: (summary) {
           if (summary.all.isEmpty) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Text(l.noMedications,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge),
-              ),
+            return EmptyState(
+              image: 'assets/illustrations/no_medicine.png',
+              message: l.noMedications,
+              actionLabel: l.addMedication,
+              actionIcon: Icons.add,
+              onAction: () => context.go('/medications/med/new'),
             );
           }
           final refills = ref.watch(refillsStreamProvider).valueOrNull ?? [];

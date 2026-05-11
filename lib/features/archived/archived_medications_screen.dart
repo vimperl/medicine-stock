@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../domain/medication_category.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../providers.dart';
+import '../../widgets/empty_state.dart';
 
 class ArchivedMedicationsScreen extends ConsumerWidget {
   const ArchivedMedicationsScreen({super.key});
@@ -20,13 +21,9 @@ class ArchivedMedicationsScreen extends ConsumerWidget {
         error: (e, _) => Center(child: Text('$e')),
         data: (list) {
           if (list.isEmpty) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Text(l.noArchivedMedications,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge),
-              ),
+            return EmptyState(
+              image: 'assets/illustrations/no_archive.png',
+              message: l.noArchivedMedications,
             );
           }
           final locale = Localizations.localeOf(context).toLanguageTag();

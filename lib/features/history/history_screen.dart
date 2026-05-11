@@ -6,6 +6,7 @@ import '../../data/database.dart';
 import '../../domain/dosage_calculator.dart';
 import '../../l10n/generated/app_localizations.dart';
 import '../../providers.dart';
+import '../../widgets/empty_state.dart';
 
 class HistoryScreen extends ConsumerWidget {
   const HistoryScreen({super.key});
@@ -44,7 +45,12 @@ class _RefillsTab extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => Center(child: Text('$e')),
       data: (refills) {
-        if (refills.isEmpty) return Center(child: Text(l.noHistory));
+        if (refills.isEmpty) {
+          return EmptyState(
+            image: 'assets/illustrations/no_history.png',
+            message: l.noHistory,
+          );
+        }
         return ListView.builder(
           itemCount: refills.length,
           itemBuilder: (ctx, i) {
@@ -103,7 +109,12 @@ class _PurchasesTab extends ConsumerWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => Center(child: Text('$e')),
       data: (purchases) {
-        if (purchases.isEmpty) return Center(child: Text(l.noHistory));
+        if (purchases.isEmpty) {
+          return EmptyState(
+            image: 'assets/illustrations/no_history.png',
+            message: l.noHistory,
+          );
+        }
         final medsById = {
           for (final m in (medsAsync.valueOrNull ?? <Medication>[])) m.id: m
         };
