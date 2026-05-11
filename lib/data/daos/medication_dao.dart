@@ -19,6 +19,13 @@ class MedicationDao extends DatabaseAccessor<AppDatabase>
     return (select(medications)..where((m) => m.archivedAt.isNull())).get();
   }
 
+  Stream<List<Medication>> watchArchivedMedications() {
+    return (select(medications)
+          ..where((m) => m.archivedAt.isNotNull())
+          ..orderBy([(m) => OrderingTerm.desc(m.archivedAt)]))
+        .watch();
+  }
+
   Future<Medication?> getById(int id) {
     return (select(medications)..where((m) => m.id.equals(id)))
         .getSingleOrNull();
@@ -55,6 +62,12 @@ class MedicationDao extends DatabaseAccessor<AppDatabase>
   Future<int> archiveMedication(int id) {
     return (update(medications)..where((m) => m.id.equals(id))).write(
       MedicationsCompanion(archivedAt: Value(DateTime.now())),
+    );
+  }
+
+  Future<int> unarchiveMedication(int id) {
+    return (update(medications)..where((m) => m.id.equals(id))).write(
+      const MedicationsCompanion(archivedAt: Value(null)),
     );
   }
 

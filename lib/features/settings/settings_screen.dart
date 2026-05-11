@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/daos/settings_dao.dart';
@@ -134,6 +135,18 @@ class SettingsScreen extends ConsumerWidget {
               }
             },
           ),
+          const Divider(),
+          Consumer(builder: (ctx, r, _) {
+            final archived = r.watch(archivedMedicationsProvider).valueOrNull;
+            final count = archived?.length ?? 0;
+            return ListTile(
+              leading: const Icon(Icons.archive_outlined),
+              title: Text(l.archivedMedications),
+              subtitle: Text(l.archivedCount(count)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.go('/settings/archived'),
+            );
+          }),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.info_outline),

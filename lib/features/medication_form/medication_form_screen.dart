@@ -137,19 +137,45 @@ class _MedicationFormState extends ConsumerState<MedicationFormScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(l.medicationSaved)));
-    context.go('/');
+    context.go('/medications');
   }
 
   Future<void> _archive() async {
     if (widget.medicationId == null) return;
-    final db = ref.read(databaseProvider);
+    final medId = widget.medicationId!;
     final l = AppL10n.of(context)!;
-    await db.medicationDao.archiveMedication(widget.medicationId!);
-    await NotificationService.instance.cancel(widget.medicationId!);
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l.archive),
+        content: Text(l.archiveExplain),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(l.cancel)),
+          FilledButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(l.confirm)),
+        ],
+      ),
+    );
+    if (confirm != true) return;
+    final db = ref.read(databaseProvider);
+    await db.medicationDao.archiveMedication(medId);
+    await NotificationService.instance.cancel(medId);
     if (!mounted) return;
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(l.medicationArchived)));
-    context.go('/');
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.showSnackBar(SnackBar(
+      content: Text(l.medicationArchived),
+      duration: const Duration(seconds: 6),
+      action: SnackBarAction(
+        label: l.undo,
+        onPressed: () async {
+          await db.medicationDao.unarchiveMedication(medId);
+        },
+      ),
+    ));
+    context.go('/medications');
   }
 
   @override

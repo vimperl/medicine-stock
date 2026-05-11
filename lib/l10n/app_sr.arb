@@ -2,6 +2,8 @@
   "@@locale": "sr",
   "appTitle": "Lekovi",
   "tabHome": "Pocetna",
+  "tabStats": "Statistika",
+  "tabMedications": "Lekovi",
   "tabHistory": "Istorija",
   "tabSettings": "Podesavanja",
   "addMedication": "Dodaj lek",
@@ -149,5 +151,19 @@
   "neverRefilled": "Kutijica jos nije punjena",
   "upcomingNeeds": "Uskoro treba dokupiti",
   "allStocked": "Sve zalihe su u redu",
-  "allMedications": "Svi lekovi"
+  "allMedications": "Svi lekovi",
+  "archivedMedications": "Arhivirani lekovi",
+  "noArchivedMedications": "Nema arhiviranih lekova.",
+  "archivedCount": "{count, plural, =0{Nijedan} =1{1 arhiviran} few{{count} arhivirana} other{{count} arhiviranih}}",
+  "@archivedCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "archivedOn": "Arhiviran {date}",
+  "@archivedOn": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "unarchive": "Vrati",
+  "medicationRestored": "Lek vracen",
+  "archiveExplain": "Lek ce biti sakriven iz aktivnih lista. Svi podaci (istorija, nabavke, doze) ostaju sacuvani i mogu se vratiti iz Podesavanja → Arhivirani lekovi.",
+  "undo": "Vrati"
 }

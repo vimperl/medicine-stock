@@ -2,6 +2,8 @@
   "@@locale": "en",
   "appTitle": "Medications",
   "tabHome": "Home",
+  "tabStats": "Stats",
+  "tabMedications": "Medications",
   "tabHistory": "History",
   "tabSettings": "Settings",
   "addMedication": "Add medication",
@@ -120,5 +122,19 @@
   "neverRefilled": "Pillbox not filled yet",
   "upcomingNeeds": "Buy soon",
   "allStocked": "All medications are well stocked",
-  "allMedications": "All medications"
+  "allMedications": "All medications",
+  "archivedMedications": "Archived medications",
+  "noArchivedMedications": "No archived medications.",
+  "archivedCount": "{count, plural, =0{None} =1{1 archived} other{{count} archived}}",
+  "@archivedCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "archivedOn": "Archived on {date}",
+  "@archivedOn": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "unarchive": "Restore",
+  "medicationRestored": "Medication restored",
+  "archiveExplain": "The medication will be hidden from active lists. All data (history, purchases, doses) is preserved and can be restored from Settings → Archived medications.",
+  "undo": "Undo"
 }

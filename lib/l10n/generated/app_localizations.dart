@@ -110,6 +110,18 @@ abstract class AppL10n {
   /// **'Pocetna'**
   String get tabHome;
 
+  /// No description provided for @tabStats.
+  ///
+  /// In sr, this message translates to:
+  /// **'Statistika'**
+  String get tabStats;
+
+  /// No description provided for @tabMedications.
+  ///
+  /// In sr, this message translates to:
+  /// **'Lekovi'**
+  String get tabMedications;
+
   /// No description provided for @tabHistory.
   ///
   /// In sr, this message translates to:
@@ -733,6 +745,54 @@ abstract class AppL10n {
   /// In sr, this message translates to:
   /// **'Svi lekovi'**
   String get allMedications;
+
+  /// No description provided for @archivedMedications.
+  ///
+  /// In sr, this message translates to:
+  /// **'Arhivirani lekovi'**
+  String get archivedMedications;
+
+  /// No description provided for @noArchivedMedications.
+  ///
+  /// In sr, this message translates to:
+  /// **'Nema arhiviranih lekova.'**
+  String get noArchivedMedications;
+
+  /// No description provided for @archivedCount.
+  ///
+  /// In sr, this message translates to:
+  /// **'{count, plural, =0{Nijedan} =1{1 arhiviran} few{{count} arhivirana} other{{count} arhiviranih}}'**
+  String archivedCount(int count);
+
+  /// No description provided for @archivedOn.
+  ///
+  /// In sr, this message translates to:
+  /// **'Arhiviran {date}'**
+  String archivedOn(String date);
+
+  /// No description provided for @unarchive.
+  ///
+  /// In sr, this message translates to:
+  /// **'Vrati'**
+  String get unarchive;
+
+  /// No description provided for @medicationRestored.
+  ///
+  /// In sr, this message translates to:
+  /// **'Lek vracen'**
+  String get medicationRestored;
+
+  /// No description provided for @archiveExplain.
+  ///
+  /// In sr, this message translates to:
+  /// **'Lek ce biti sakriven iz aktivnih lista. Svi podaci (istorija, nabavke, doze) ostaju sacuvani i mogu se vratiti iz Podesavanja → Arhivirani lekovi.'**
+  String get archiveExplain;
+
+  /// No description provided for @undo.
+  ///
+  /// In sr, this message translates to:
+  /// **'Vrati'**
+  String get undo;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

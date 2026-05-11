@@ -2,6 +2,8 @@
   "@@locale": "sr_Cyrl",
   "appTitle": "Лекови",
   "tabHome": "Почетна",
+  "tabStats": "Статистика",
+  "tabMedications": "Лекови",
   "tabHistory": "Историја",
   "tabSettings": "Подешавања",
   "addMedication": "Додај лек",
@@ -120,5 +122,19 @@
   "neverRefilled": "Кутијица још није пуњена",
   "upcomingNeeds": "Ускоро треба докупити",
   "allStocked": "Све залихе су у реду",
-  "allMedications": "Сви лекови"
+  "allMedications": "Сви лекови",
+  "archivedMedications": "Архивирани лекови",
+  "noArchivedMedications": "Нема архивираних лекова.",
+  "archivedCount": "{count, plural, =0{Ниједан} =1{1 архивиран} few{{count} архивирана} other{{count} архивираних}}",
+  "@archivedCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "archivedOn": "Архивиран {date}",
+  "@archivedOn": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "unarchive": "Врати",
+  "medicationRestored": "Лек враћен",
+  "archiveExplain": "Лек ће бити сакривен из активних листа. Сви подаци (историја, набавке, дозе) остају сачувани и могу се вратити из Подешавања → Архивирани лекови.",
+  "undo": "Врати"
 }

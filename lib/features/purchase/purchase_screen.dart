@@ -65,7 +65,7 @@ class _PurchaseState extends ConsumerState<PurchaseScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(l.purchaseSaved)));
-    context.go('/');
+    context.go('/medications');
   }
 
   @override

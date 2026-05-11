@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'features/archived/archived_medications_screen.dart';
 import 'features/history/history_screen.dart';
-import 'features/home/home_screen.dart';
 import 'features/medication_form/medication_form_screen.dart';
+import 'features/medications/medications_screen.dart';
 import 'features/purchase/purchase_screen.dart';
 import 'features/settings/settings_screen.dart';
+import 'features/stats/stats_screen.dart';
 import 'l10n/generated/app_localizations.dart';
 import 'providers.dart';
 
@@ -60,7 +62,13 @@ GoRouter _buildRouter() => GoRouter(
             StatefulShellBranch(routes: [
               GoRoute(
                 path: '/',
-                builder: (ctx, st) => const HomeScreen(),
+                builder: (ctx, st) => const StatsScreen(),
+              ),
+            ]),
+            StatefulShellBranch(routes: [
+              GoRoute(
+                path: '/medications',
+                builder: (ctx, st) => const MedicationsScreen(),
                 routes: [
                   GoRoute(
                     path: 'med/new',
@@ -89,6 +97,12 @@ GoRouter _buildRouter() => GoRouter(
               GoRoute(
                 path: '/settings',
                 builder: (ctx, st) => const SettingsScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'archived',
+                    builder: (ctx, st) => const ArchivedMedicationsScreen(),
+                  ),
+                ],
               ),
             ]),
           ],
@@ -111,9 +125,13 @@ class RootShell extends StatelessWidget {
             initialLocation: i == shell.currentIndex),
         destinations: [
           NavigationDestination(
+              icon: const Icon(Icons.insights_outlined),
+              selectedIcon: const Icon(Icons.insights),
+              label: l.tabStats),
+          NavigationDestination(
               icon: const Icon(Icons.medication_outlined),
               selectedIcon: const Icon(Icons.medication),
-              label: l.tabHome),
+              label: l.tabMedications),
           NavigationDestination(
               icon: const Icon(Icons.history_outlined),
               selectedIcon: const Icon(Icons.history),

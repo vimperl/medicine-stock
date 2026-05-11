@@ -15,6 +15,12 @@ class AppL10nSr extends AppL10n {
   String get tabHome => 'Pocetna';
 
   @override
+  String get tabStats => 'Statistika';
+
+  @override
+  String get tabMedications => 'Lekovi';
+
+  @override
   String get tabHistory => 'Istorija';
 
   @override
@@ -374,6 +380,43 @@ class AppL10nSr extends AppL10n {
 
   @override
   String get allMedications => 'Svi lekovi';
+
+  @override
+  String get archivedMedications => 'Arhivirani lekovi';
+
+  @override
+  String get noArchivedMedications => 'Nema arhiviranih lekova.';
+
+  @override
+  String archivedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count arhiviranih',
+      few: '$count arhivirana',
+      one: '1 arhiviran',
+      zero: 'Nijedan',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String archivedOn(String date) {
+    return 'Arhiviran $date';
+  }
+
+  @override
+  String get unarchive => 'Vrati';
+
+  @override
+  String get medicationRestored => 'Lek vracen';
+
+  @override
+  String get archiveExplain =>
+      'Lek ce biti sakriven iz aktivnih lista. Svi podaci (istorija, nabavke, doze) ostaju sacuvani i mogu se vratiti iz Podesavanja → Arhivirani lekovi.';
+
+  @override
+  String get undo => 'Vrati';
 }
 
 /// The translations for Serbian, using the Cyrillic script (`sr_Cyrl`).
@@ -385,6 +428,12 @@ class AppL10nSrCyrl extends AppL10nSr {
 
   @override
   String get tabHome => 'Почетна';
+
+  @override
+  String get tabStats => 'Статистика';
+
+  @override
+  String get tabMedications => 'Лекови';
 
   @override
   String get tabHistory => 'Историја';
@@ -746,4 +795,41 @@ class AppL10nSrCyrl extends AppL10nSr {
 
   @override
   String get allMedications => 'Сви лекови';
+
+  @override
+  String get archivedMedications => 'Архивирани лекови';
+
+  @override
+  String get noArchivedMedications => 'Нема архивираних лекова.';
+
+  @override
+  String archivedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count архивираних',
+      few: '$count архивирана',
+      one: '1 архивиран',
+      zero: 'Ниједан',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String archivedOn(String date) {
+    return 'Архивиран $date';
+  }
+
+  @override
+  String get unarchive => 'Врати';
+
+  @override
+  String get medicationRestored => 'Лек враћен';
+
+  @override
+  String get archiveExplain =>
+      'Лек ће бити сакривен из активних листа. Сви подаци (историја, набавке, дозе) остају сачувани и могу се вратити из Подешавања → Архивирани лекови.';
+
+  @override
+  String get undo => 'Врати';
 }

@@ -15,6 +15,12 @@ class AppL10nEn extends AppL10n {
   String get tabHome => 'Home';
 
   @override
+  String get tabStats => 'Stats';
+
+  @override
+  String get tabMedications => 'Medications';
+
+  @override
   String get tabHistory => 'History';
 
   @override
@@ -365,4 +371,40 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get allMedications => 'All medications';
+
+  @override
+  String get archivedMedications => 'Archived medications';
+
+  @override
+  String get noArchivedMedications => 'No archived medications.';
+
+  @override
+  String archivedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count archived',
+      one: '1 archived',
+      zero: 'None',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String archivedOn(String date) {
+    return 'Archived on $date';
+  }
+
+  @override
+  String get unarchive => 'Restore';
+
+  @override
+  String get medicationRestored => 'Medication restored';
+
+  @override
+  String get archiveExplain =>
+      'The medication will be hidden from active lists. All data (history, purchases, doses) is preserved and can be restored from Settings → Archived medications.';
+
+  @override
+  String get undo => 'Undo';
 }

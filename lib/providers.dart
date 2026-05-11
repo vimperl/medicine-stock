@@ -20,6 +20,11 @@ final medicationsStreamProvider = StreamProvider<List<Medication>>((ref) {
   return db.medicationDao.watchActiveMedications();
 });
 
+final archivedMedicationsProvider = StreamProvider<List<Medication>>((ref) {
+  final db = ref.watch(databaseProvider);
+  return db.medicationDao.watchArchivedMedications();
+});
+
 final medicationDosageProvider =
     StreamProvider.family<List<DosageEntry>, int>((ref, medicationId) {
   final db = ref.watch(databaseProvider);
