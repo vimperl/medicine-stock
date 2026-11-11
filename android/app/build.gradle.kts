@@ -29,6 +29,14 @@ android {
         multiDexEnabled = true
     }
 
+    signingConfigs {
+        getByName("debug") {
+            // CI restores the shared debug keystore to this path so its builds
+            // carry the same signature as local ones (installable as updates).
+            System.getenv("DEBUG_KEYSTORE_PATH")?.let { storeFile = file(it) }
+        }
+    }
+
     buildTypes {
         release {
             // Signing with the debug keys for now, so `flutter run --release` works.
