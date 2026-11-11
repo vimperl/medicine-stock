@@ -16,7 +16,16 @@ class MedicationsScreen extends ConsumerWidget {
     final l = AppL10n.of(context)!;
     final summaryAsync = ref.watch(homeSummaryProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(l.tabMedications)),
+      appBar: AppBar(
+        title: Text(l.tabMedications),
+        actions: [
+          IconButton(
+            tooltip: l.addPurchase,
+            icon: const Icon(Icons.shopping_bag),
+            onPressed: () => context.go('/medications/purchase'),
+          ),
+        ],
+      ),
       body: summaryAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('$e')),
@@ -49,21 +58,12 @@ class MedicationsScreen extends ConsumerWidget {
             onPressed: () => showRefillDialog(context, ref),
           ),
           const SizedBox(height: 12),
-          Row(mainAxisSize: MainAxisSize.min, children: [
-            FloatingActionButton.small(
-              heroTag: 'meds-purchase',
-              tooltip: l.addPurchase,
-              onPressed: () => context.go('/medications/purchase'),
-              child: const Icon(Icons.shopping_bag),
-            ),
-            const SizedBox(width: 12),
-            FloatingActionButton.small(
-              heroTag: 'meds-add',
-              tooltip: l.addMedication,
-              onPressed: () => context.go('/medications/med/new'),
-              child: const Icon(Icons.add),
-            ),
-          ]),
+          FloatingActionButton.small(
+            heroTag: 'meds-add',
+            tooltip: l.addMedication,
+            onPressed: () => context.go('/medications/med/new'),
+            child: const Icon(Icons.add),
+          ),
         ],
       ),
     );

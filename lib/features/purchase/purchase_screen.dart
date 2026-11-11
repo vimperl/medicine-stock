@@ -77,7 +77,10 @@ class _PurchaseState extends ConsumerState<PurchaseScreen> {
       body: medsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('$e')),
-        data: (meds) {
+        data: (unsorted) {
+          final meds = [...unsorted]
+            ..sort((a, b) =>
+                a.name.toLowerCase().compareTo(b.name.toLowerCase()));
           if (meds.isEmpty) {
             return Center(child: Text(l.noMedications));
           }
